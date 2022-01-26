@@ -155,7 +155,12 @@ public class ClientInstaller : MumbleInstall {
 
 		for (int i = 0; i < binaries.Count; i++) {
 			if (binaries[i] == "mumble.exe") {
-				binaryFiles[i] = new File(@"..\..\" + binaries[i], new FileAssociation("mumble_plugin", "application/mumble", "Open", "\"%1\""));
+				binaryFiles[i] = new File(@"..\..\" + binaries[i],
+					new FileAssociation("mumble_plugin", "application/mumble", "Open", "\"%1\""),
+					new RegValue(RegistryHive.ClassesRoot, "mumble", "", "URL:Mumble"),
+					new RegValue(RegistryHive.ClassesRoot, "mumble", "URL Protocol", ""),
+					new RegValue(RegistryHive.ClassesRoot, @"mumble\DefaultIcon", "", "[#mumble.exe]"),
+					new RegValue(RegistryHive.ClassesRoot, @"mumble\shell\open\command", "", "[#mumble.exe] \"%1\""));
 			} else {
 				binaryFiles[i] = new File(@"..\..\" + binaries[i]);
 			}
